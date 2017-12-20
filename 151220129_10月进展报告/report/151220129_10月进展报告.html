@@ -1,0 +1,253 @@
+<!doctype html><html><head><meta charset='utf-8'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css">
+<link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+<link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+
+</head><body class="markdown-body">
+<h1 data-line="0" class="code-line" id="%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E3%80%8B%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A110%E6%9C%88%E8%BF%9B%E5%B1%95%E6%8A%A5%E5%91%8A">《计算机图形学》系统设计10月进展报告</h1>
+<p data-line="2" class="code-line"><strong>151220129 计科 吴政亿</strong></p>
+<p data-line="4" class="code-line">（南京大学 计算机科学与技术系，南京 210093）</p>
+<p data-line="6" class="code-line">摘要：用C#向windows的画图看齐，实现了文件的打开与保存，直线/圆/曲线/点 等的形状绘制，可以自主选择粗细与颜色，并且应用派生的ArrayList类Step保存了每一步的操作，可以进行撤销与恢复操作。</p>
+<p data-line="8" class="code-line"><img src="http://img.blog.csdn.net/20171030181835041?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="效果"></p>
+<h3 data-line="10" class="code-line" id="%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83">实验环境</h3>
+<p data-line="12" class="code-line">报告采用markdown编写，并另存为了html与pdf格式，置于压缩包内report文件夹，code文件夹中包含了本次阶段性代码，Paint文件则是project的打包发布版本，便于助教测试。</p>
+<p data-line="14" class="code-line">基于Visual Studio 2015下的 C# 编写。</p>
+<h3 data-line="16" class="code-line" id="%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84%E6%B5%85%E6%9E%90">代码结构浅析</h3>
+<p data-line="17" class="code-line">代码主要分为三个部分：</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Information</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Program.cs</td>
+<td>应用程序的主入口点。</td>
+</tr>
+<tr>
+<td>Form1.cs</td>
+<td>画图程序的主窗口与实现的部分代码。</td>
+</tr>
+<tr>
+<td>StepPaint.cs</td>
+<td>ArrayList的派生类，用于存储每一步的操作。</td>
+</tr>
+</tbody>
+</table>
+<h4 data-line="25" class="code-line" id="form1cs">Form1.cs</h4>
+<table>
+<thead>
+<tr>
+<th>Variable Name</th>
+<th>Information</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CASE</strong> now_case</td>
+<td>定义了当前的操作形状，例如画线与画圆</td>
+</tr>
+<tr>
+<td><strong>BREATH</strong> bh</td>
+<td>定义了画笔的粗细</td>
+</tr>
+<tr>
+<td><strong>Color</strong> color</td>
+<td>当前画笔颜色</td>
+</tr>
+<tr>
+<td><strong>int</strong> x1,y1</td>
+<td>定义了直线，圆等的起点坐标，在鼠标摁下时更新</td>
+</tr>
+<tr>
+<td><strong>bool</strong> mouse_down</td>
+<td>用于判断鼠标时候松开</td>
+</tr>
+<tr>
+<td><strong>bool</strong> is_back</td>
+<td>用于判断是否处于撤销状态</td>
+</tr>
+<tr>
+<td><strong>StepPaint</strong> Step</td>
+<td>存储每一步的操作动作</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Function Name</th>
+<th>Information</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>private void</strong> InitForm1()</td>
+<td>初始化成员变量</td>
+</tr>
+<tr>
+<td><strong>private void</strong> drawPixel(x,y)</td>
+<td>在(x,y)处画点(粗细取决于bh)</td>
+</tr>
+<tr>
+<td><strong>private void</strong> DDALine(x1,y1,x2,y2)</td>
+<td>画线函数DDA算法</td>
+</tr>
+<tr>
+<td><strong>private void</strong> BresenhamLine(x1, y1, x2, y2)</td>
+<td>画线函数Bresenham算法</td>
+</tr>
+<tr>
+<td><strong>private void</strong> MidpointLine(x0, y0, x1, y1)</td>
+<td>画线函数中心点生成算法</td>
+</tr>
+<tr>
+<td><strong>private void</strong> BresenhamCircle(R, xc, yc)</td>
+<td>画圆函数Bresenham算法</td>
+</tr>
+<tr>
+<td><strong>private void</strong> button_<em>Color</em>_Click(sender, e)</td>
+<td>不同颜色对应了不同的按钮来改变当前画笔颜色</td>
+</tr>
+<tr>
+<td><strong>private void</strong> openfile_Click(sender, e)</td>
+<td>打开文件响应函数</td>
+</tr>
+<tr>
+<td><strong>private void</strong> savefile_Click(sender, e)</td>
+<td>保存文件响应函数</td>
+</tr>
+<tr>
+<td><strong>private void</strong> button_<em>Function</em>_Click(sender, e)</td>
+<td>相应功能的相应函数，其中有撤销、恢复以及各种形状选择</td>
+</tr>
+<tr>
+<td><strong>private void</strong> pictureBox1_MouseUp(sender, e)</td>
+<td>鼠标左键松开时响应函数</td>
+</tr>
+<tr>
+<td><strong>private void</strong> pictureBox1_MouseMove(sender, e)</td>
+<td>鼠标移动时响应函数</td>
+</tr>
+<tr>
+<td><strong>private void</strong> pictureBox1_MouseDown(sender, e)</td>
+<td>鼠标左键摁下时响应函数</td>
+</tr>
+<tr>
+<td><strong>private void</strong> <em>粗细</em>ToolStripMenuItem_Click(sender, e)</td>
+<td>设置画笔粗细的响应函数</td>
+</tr>
+</tbody>
+</table>
+<h4 data-line="56" class="code-line" id="steppointcs">StepPoint.cs</h4>
+<table>
+<thead>
+<tr>
+<th>Function Name</th>
+<th>Information</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ArrayList</td>
+<td>存储所有步骤的Image</td>
+</tr>
+<tr>
+<td>int StepImage_now</td>
+<td>记录当前显示的图像在ArrayList的下标</td>
+</tr>
+<tr>
+<td>void ClearStep()</td>
+<td>清空ArrayList与StepImage_now</td>
+</tr>
+<tr>
+<td>void InitStep(Image)</td>
+<td>用一张Image初始化并作为保卫者</td>
+</tr>
+<tr>
+<td>void AddStep(obj)</td>
+<td>添加一个Image Step</td>
+</tr>
+<tr>
+<td>bool StepIsNull()</td>
+<td>判断StepImage_now是否位于最底部</td>
+</tr>
+<tr>
+<td>bool StepIsFull()</td>
+<td>判断StepImage_now是否位于最顶部</td>
+</tr>
+<tr>
+<td>Image PopStep()</td>
+<td>撤销当前步骤</td>
+</tr>
+<tr>
+<td>Image PushStep()</td>
+<td>恢复上一个步骤</td>
+</tr>
+<tr>
+<td>Image RefreshStep()</td>
+<td>将最后一个步骤永久撤销</td>
+</tr>
+<tr>
+<td>void RemoveNullStep()</td>
+<td>当撤销状态下执行一个步骤，将清除后面的步骤</td>
+</tr>
+</tbody>
+</table>
+<h3 data-line="72" class="code-line" id="%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0">核心代码实现</h3>
+<p data-line="74" class="code-line">这部分简述略过，因为都是按照上课讲的实现的算法</p>
+<h4 data-line="76" class="code-line" id="dda%E7%9B%B4%E7%BA%BF%E7%AE%97%E6%B3%95">DDA直线算法</h4>
+<pre class="hljs"><code><div>private void DDALine(int x1, int y1, int x2, int y2){
+    double dx, dy, e, x, y;
+    dx = x2 - x1;
+    dy = y2 - y1;
+    e = (Math.Abs(dx) &gt; Math.Abs(dy)) ? Math.Abs(dx) : Math.Abs(dy);
+    dx /= e; dy /= e;
+    x = x1;
+    y = y1;
+    for (int i = 1; i &lt;= e; i++)
+    {
+        drawPixel((int)(x + 0.5), (int)(y + 0.5));
+        x += dx;
+        y += dy;
+    }
+}
+
+</div></code></pre>
+<h4 data-line="97" class="code-line" id="bresenham%E7%94%BB%E5%9C%86%E7%AE%97%E6%B3%95">Bresenham画圆算法</h4>
+<pre class="hljs"><code><div>private void BresenhamCircle(int R, int xc, int yc){
+    int x, y, p;
+    x = 0; y = R;
+    p = 3 - 2 * R;
+    for (; x &lt;= y; x++)
+    {
+        /* 下面八个分别对称 八个部分*/
+        drawPixel(x + xc, y + yc);
+        drawPixel(x + xc, -y + yc);
+        drawPixel(y + xc, x + yc);
+        drawPixel(y + xc, -x + yc);
+        drawPixel(-x + xc, y + yc);
+        drawPixel(-x + xc, -y + yc);
+        drawPixel(-y + xc, x + yc);
+        drawPixel(-y + xc, -x + yc);
+        if (p &gt;= 0)
+        {
+            p += 4 * (x - y) + 10;
+            y--;
+        }
+        else
+        {
+            p += 4 * x + 6;
+        }
+    }
+}
+</div></code></pre>
+<h3 data-line="128" class="code-line" id="%E5%AE%9E%E9%AA%8C%E6%84%9F%E6%82%9F">实验感悟</h3>
+<p data-line="130" class="code-line">对直线，圆等的生成算法有了更深刻的了解，并将ppt中的所有算法都简要测试了一遍并选择了最为简洁的方法，另外对像素与图像生成也有了实践的经验，下一次的目标是对于线的粗细有着更好的优化方案，现在的线粗细采用的是画圆的方案，当选项为粗时略有卡顿。</p>
+
+</body></html>

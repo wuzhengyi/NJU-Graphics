@@ -1,0 +1,567 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css">
+    <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+    <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+
+</head>
+
+<body class="markdown-body">
+    <h1 data-line="0" class="code-line" id="%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E3%80%8B%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A111%E6%9C%88%E8%BF%9B%E5%B1%95%E6%8A%A5%E5%91%8A">《计算机图形学》系统设计11月进展报告</h1>
+    <p data-line="2" class="code-line">
+        <strong>151220129 计科 吴政亿</strong>
+    </p>
+    <p data-line="4" class="code-line">（南京大学 计算机科学与技术系，南京 210093）</p>
+    <h3 data-line="7" class="code-line" id="%E6%91%98%E8%A6%81">摘要</h3>
+    <h4 data-line="9" class="code-line" id="%E5%8D%81%E6%9C%88%E6%9C%88%E6%9B%B4%E6%96%B0%E8%BF%9B%E5%BA%A6">十月月更新进度</h4>
+    <p data-line="11" class="code-line">用C#向windows的画图看齐，实现了文件的打开与保存，直线/圆/曲线/点 等的形状绘制，可以自主选择粗细与颜色，并且应用派生的ArrayList类Step保存了每一步的操作，可以进行撤销与恢复操作。</p>
+    <p data-line="13" class="code-line">
+        <img src="http://img.blog.csdn.net/20171030181835041?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="效果">
+    </p>
+    <h4 data-line="16" class="code-line" id="%E5%8D%81%E4%B8%80%E6%9C%88%E6%9B%B4%E6%96%B0%E8%BF%9B%E5%BA%A6">十一月更新进度</h4>
+    <p data-line="18" class="code-line">实现了颜色填充，图片填充，选择，裁剪，平移等功能，并且引入了画布的概念 由于发现我的代码底层实现有问题，所以我在完成这次作业后，开始更改底层机理，因为之前我对每一步的操作存储的是操作执行后的图像，而这样的话想要单独对已经画过的图形进行重新选择就变的十分困难。因此在新的重构的代码中我将保存的信息更改为每一次执行的操作(Shape)。
+    </p>
+    <p data-line="21" class="code-line">
+        <img src="http://img.blog.csdn.net/20171129213352118?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="效果">
+    </p>
+    <h3 data-line="23" class="code-line" id="%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83">实验环境</h3>
+    <p data-line="25" class="code-line">报告采用markdown编写，并另存为了html与pdf格式，置于压缩包内report文件夹，code文件夹中包含了本次阶段性代码，Paint文件则是project的打包发布版本，便于助教测试。</p>
+    <p data-line="27" class="code-line">基于Visual Studio 2015下的 C# 编写。</p>
+    <h3 data-line="29" class="code-line" id="%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84%E6%B5%85%E6%9E%90">代码结构浅析</h3>
+    <p data-line="30" class="code-line">代码主要分为三个部分：</p>
+    <table>
+        <thead>
+            <tr>
+                <th>File Name</th>
+                <th>Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code>Program.cs</code>
+                </td>
+                <td>应用程序的主入口点。</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>Form1.cs</code>
+                </td>
+                <td>画图程序的主窗口。</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>Button_Click.cs</code>
+                </td>
+                <td>定义的颜色、功能按钮事件</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>Fill.cs</code>
+                </td>
+                <td>填充部分的实现</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>PictureBox.cs</code>
+                </td>
+                <td>画图的基本架构</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>Shape.cs</code>
+                </td>
+                <td>定义了各种形状的实现代码</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>Size.cs</code>
+                </td>
+                <td>对于调整画布、选框大小的实现</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>StepPaint.cs</code>
+                </td>
+                <td>ArrayList的派生类，用于存储每一步的操作。</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <thead>
+            <tr>
+                <th>Variable Name</th>
+                <th>Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code>CASE NowCase</code>
+                </td>
+                <td>定义了当前的操作形状，例如画线与画圆</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>BREATH bh</code>
+                </td>
+                <td>定义了画笔的粗细</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>Color color</code>
+                </td>
+                <td>当前画笔颜色</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>int x0,y0</code>
+                </td>
+                <td>定义了直线，圆等的起点坐标，在鼠标摁下时更新</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>int x1,y1,x2,y2</code>
+                </td>
+                <td>定义了矩形选框的左上、右下角坐标</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>bool IsMouseDown</code>
+                </td>
+                <td>用于判断鼠标时候松开</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>bool IsBack</code>
+                </td>
+                <td>用于判断是否处于撤销状态</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>StepPaint Step</code>
+                </td>
+                <td>存储每一步的操作动作</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>Point p</code>
+                </td>
+                <td>用于调整Size时的临时变量</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>Bitmap ChoseRegion</code>
+                </td>
+                <td>存储被选择的区域图像</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>Button pictureBoxSize</code>
+                </td>
+                <td>用于调整pictureBox大小的按钮</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>Button ChoseSize</code>
+                </td>
+                <td>用于调整选区大小的按钮</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <table>
+        <thead>
+            <tr>
+                <th>Function Name</th>
+                <th>Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code>private void InitForm1()</code>
+                </td>
+                <td>初始化成员变量</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void InitButton()</code>
+                </td>
+                <td>初始化按钮信息</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>public Form1()</code>
+                </td>
+                <td>Form1构造函数</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4 data-line="71" class="code-line" id="buttonclickcs">Button_Click.cs</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Function Name</th>
+                <th>Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code>private void button_*Color*_Click(...)</code>
+                </td>
+                <td>不同颜色对应了不同的按钮来改变当前画笔颜色</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void *Breath*ToolStripMenuItem_Click(...)</code>
+                </td>
+                <td>设置画笔粗细的响应函数</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void openfile_Click(...)</code>
+                </td>
+                <td>打开文件响应函数</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void savefile_Click(...)</code>
+                </td>
+                <td>保存文件响应函数</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void button_*Function*_Click(...)</code>
+                </td>
+                <td>相应功能的相应函数，其中有撤销、恢复、填充、裁剪等</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void button_*Shape*_Click(...)</code>
+                </td>
+                <td>选择各个形状的相应函数</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void CaseChange(CASE temp)</code>
+                </td>
+                <td>更改当前状态</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4 data-line="83" class="code-line" id="fillcs">Fill.cs</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Function Name</th>
+                <th>Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code>private void FillColor(...)</code>
+                </td>
+                <td>在坐标(x,y)处用color泛滥填充</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void FillPic(...)</code>
+                </td>
+                <td>在(x0,y0),(x1,y1)界定的区域内用pic图像填充</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4 data-line="90" class="code-line" id="pictureboxcs">PictureBox.cs</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Function Name</th>
+                <th>Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code>private void pictureBox1_MouseUp(sender, e)</code>
+                </td>
+                <td>鼠标左键松开时响应函数</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void pictureBox1_MouseMove(sender, e)</code>
+                </td>
+                <td>鼠标移动时响应函数</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void pictureBox1_MouseDown(sender, e)</code>
+                </td>
+                <td>鼠标左键摁下时响应函数</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4 data-line="98" class="code-line" id="shapecs">Shape.cs</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Function Name</th>
+                <th>Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code>private void drawPixel(x,y,*color*)</code>
+                </td>
+                <td>在(x,y)处画点(粗细取决于bh,颜色color可选)</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void DDALine(x1,y1,x2,y2)</code>
+                </td>
+                <td>画线函数DDA算法</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void DDADottedLine(x1,y1,x2,y2)</code>
+                </td>
+                <td>画
+                    <strong>虚线</strong>函数DDA算法</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void BresenhamLine(x1, y1, x2, y2)</code>
+                </td>
+                <td>画线函数Bresenham算法</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void MidpointLine(x0, y0, x1, y1)</code>
+                </td>
+                <td>画线函数中心点生成算法</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void BresenhamCircle(R, xc, yc)</code>
+                </td>
+                <td>画圆函数Bresenham算法</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void DrawRectangle(x0, y0, x1, y1)</code>
+                </td>
+                <td>画矩形函数</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void Bresenhamellipse(rx, ry, xc, yc)</code>
+                </td>
+                <td>画椭圆函数Bresenham算法</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4 data-line="111" class="code-line" id="sizecs">Size.cs</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Function Name</th>
+                <th>Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code>private void PictureBoxSize_Mouse*Up/Move/Down*(...)</code>
+                </td>
+                <td>为了定义调整画布大小按钮的响应函数</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void ChoseSize_Mouse*Up/Move/Down*(...)</code>
+                </td>
+                <td>为了定义调整选区大小按钮的响应函数</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void RefreshChoseSize(...)</code>
+                </td>
+                <td>调整选区大小后刷新选区显示内容</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void RefreshPicutreBoxSize(...)</code>
+                </td>
+                <td>调整画布大小后刷新选区显示内容</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private bool PointInRectangle(int x, int y)</code>
+                </td>
+                <td>判断点(x,y)是否在选区内</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>private void PanningChoseRegion(int dx, int dy)</code>
+                </td>
+                <td>平移选择的区域</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4 data-line="122" class="code-line" id="steppointcs">StepPoint.cs</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Function Name</th>
+                <th>Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <code>ArrayList this</code>
+                </td>
+                <td>存储所有步骤的Image</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>int StepImage_now</code>
+                </td>
+                <td>记录当前显示的图像在ArrayList的下标</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>void ClearStep()</code>
+                </td>
+                <td>清空ArrayList与StepImage_now</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>void InitStep(Image)</code>
+                </td>
+                <td>用一张Image初始化并作为保卫者</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>void AddStep(obj)</code>
+                </td>
+                <td>添加一个Image Step</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>bool StepIsNull()</code>
+                </td>
+                <td>判断StepImage_now是否位于最底部</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>bool StepIsFull()</code>
+                </td>
+                <td>判断StepImage_now是否位于最顶部</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>Image PopStep()</code>
+                </td>
+                <td>撤销当前步骤</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>Image PushStep()</code>
+                </td>
+                <td>恢复上一个步骤</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>Image RefreshStep()</code>
+                </td>
+                <td>将最后一个步骤永久撤销</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>void RemoveNullStep()</code>
+                </td>
+                <td>当撤销状态下执行一个步骤，将清除后面的步骤</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3 data-line="138" class="code-line" id="%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0">核心代码实现</h3>
+    <h4 data-line="140" class="code-line" id="%E7%BA%AF%E8%89%B2%E6%B3%9B%E6%BB%A5%E5%A1%AB%E5%85%85%E7%AE%97%E6%B3%95%E5%9B%9B%E8%BF%9E%E9%80%9A">纯色泛滥填充算法[四连通]</h4>
+    <p data-line="142" class="code-line">一开始是用递归写的，发现会堆栈溢出，因此改为非递归算法，该算法用栈实现，每一次填充颜色成功便把自己周围的四个点入栈，</p>
+    <pre class="hljs"><code><div>private void FillColor(Stack&lt;point&gt; pointStack, Bitmap map, Color OldColor, int x, int y)
+{
+    point temp;
+    while (pointStack.Count != 0)
+    {
+        temp = pointStack.Pop();
+        //边界检测
+        if (temp.x &lt; 0 || temp.y &lt; 0 || temp.x &gt;= map.Width || temp.y &gt;= map.Height || temp.x &gt;= pictureBox.Width || temp.y &gt;= pictureBox.Height)
+            continue;
+        if (map.GetPixel(temp.x, temp.y) == OldColor &amp;&amp; map.GetPixel(temp.x, temp.y) != color)
+        {
+            map.SetPixel(temp.x, temp.y, color);
+            temp.x++;
+            pointStack.Push(temp);
+            temp.x -= 2;
+            pointStack.Push(temp);
+            temp.x++;
+            temp.y++;
+            pointStack.Push(temp);
+            temp.y -= 2;
+            pointStack.Push(temp);
+        }
+    }
+}
+
+</div></code></pre>
+    <h4 data-line="172" class="code-line" id="%E5%9B%BE%E5%83%8F%E5%A1%AB%E5%85%85%E7%AE%97%E6%B3%95">图像填充算法</h4>
+    <pre class="hljs"><code><div>private void FillPic(Bitmap pic, int x0, int y0, int x1, int y1)
+{
+    Bitmap map = new Bitmap(pictureBox.Image);
+    for (int i = x0; i &lt; x1; i++)
+    {
+        for (int j = y0; j &lt; y1; j++)
+        {
+            if (i - x0 &gt; 0 &amp;&amp; i - x0 &lt; map.Width &amp;&amp; j - y0 &gt; 0 &amp;&amp; j - y0 &lt; map.Height)
+                map.SetPixel(i, j, pic.GetPixel(i - x0, j - y0));
+        }
+    }
+    pictureBox.Image = map;
+}
+</div></code></pre>
+    <h4 data-line="190" class="code-line" id="%E5%9B%BE%E5%83%8F%E6%8B%89%E4%BC%B8%E7%AE%97%E6%B3%95">图像拉伸算法</h4>
+    <p data-line="192" class="code-line">先求得缩放系数，然后通过计算获得拉伸后的坐标与颜色信息</p>
+    <pre class="hljs"><code><div>static public Bitmap SetBitmapSize(Bitmap src, int w, int h)
+{
+    int tw = src.Width;
+    int th = src.Height;
+    double dw = (double)w / tw;
+    double dh = (double)h / th;
+    Bitmap map = new Bitmap(w, h);
+    for (int i = 0; i &lt; w; i++)
+    {
+        for (int j = 0; j &lt; h; j++)
+        {
+            map.SetPixel(i, j, src.GetPixel((int)((double)i / dw), (int)((double)j / dh)));
+        }
+    }
+    return map;
+}
+</div></code></pre>
+    <h3 data-line="213" class="code-line" id="%E5%AE%9E%E9%AA%8C%E6%84%9F%E6%82%9F">实验感悟</h3>
+    <p data-line="215" class="code-line">这一次实验，我添加了矩形与椭圆，并且实现了平移，缩放，填充，裁剪等功能。 在实现椭圆代码时，发现PPT给的信息有误，导致DeBug许久有点难受，最后自己算了一遍所有参数。 本次实验实现后，觉的我存储步骤的方法信息不够全面(之前是存下了每一次步骤后的Image)，
+        我现在已经着手开始重构我的代码，重构部分目前已经实现了各种形状的绘画，其他部分仍在实现中。
+    </p>
+
+</body>
+
+</html>
