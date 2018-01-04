@@ -1,0 +1,520 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.4.1/github-markdown.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css">
+    <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/texmath.css">
+    <link rel="stylesheet" href="https://gitcdn.xyz/repo/goessner/mdmath/master/css/vscode-texmath.css">
+
+</head>
+
+<body class="markdown-body">
+    <h1 data-line="1" class="code-line" id="%E3%80%8A%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E3%80%8B%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E%E4%B9%A6">《计算机图形学》系统使用说明书</h1>
+    <p data-line="3" class="code-line">
+        <strong>151220129 计科 吴政亿</strong>
+    </p>
+    <p data-line="5" class="code-line">（南京大学 计算机科学与技术系，南京 210093）</p>
+    <!-- vscode-markdown-toc -->
+    <ul>
+        <li data-line="8" class="code-line">
+            <ol>
+                <li data-line="8" class="code-line">
+                    <a href="#">摘要</a>
+                </li>
+            </ol>
+        </li>
+        <li data-line="9" class="code-line">
+            <ol start="2">
+                <li data-line="9" class="code-line">
+                    <a href="#-1">实验环境</a>
+                </li>
+            </ol>
+        </li>
+        <li data-line="10" class="code-line">
+            <ol start="3">
+                <li data-line="10" class="code-line">
+                    <a href="#-1">功能及使用说明</a>
+                </li>
+            </ol>
+            <ul>
+                <li data-line="11" class="code-line">3.1.
+                    <a href="#-1">图形数据输入功能</a>
+                    <ul>
+                        <li data-line="12" class="code-line">3.1.1.
+                            <a href="#-1">直线输入</a>
+                        </li>
+                        <li data-line="13" class="code-line">3.1.2.
+                            <a href="#-1">圆输入</a>
+                        </li>
+                        <li data-line="14" class="code-line">3.1.3.
+                            <a href="#-1">椭圆输入</a>
+                        </li>
+                        <li data-line="15" class="code-line">3.1.4.
+                            <a href="#-1">矩形输入</a>
+                        </li>
+                        <li data-line="16" class="code-line">3.1.5.
+                            <a href="#Bezier">Bezier曲线输入</a>
+                        </li>
+                        <li data-line="17" class="code-line">3.1.6.
+                            <a href="#B">B样条输入</a>
+                        </li>
+                        <li data-line="18" class="code-line">3.1.7.
+                            <a href="#-1">多边形输入</a>
+                        </li>
+                        <li data-line="19" class="code-line">3.1.8.
+                            <a href="#-1">填充输入</a>
+                        </li>
+                    </ul>
+                </li>
+                <li data-line="20" class="code-line">3.2.
+                    <a href="#-1">图形数据编辑功能</a>
+                    <ul>
+                        <li data-line="21" class="code-line">3.2.1.
+                            <a href="#-1">直线编辑</a>
+                        </li>
+                        <li data-line="22" class="code-line">3.2.2.
+                            <a href="#-1">圆编辑</a>
+                        </li>
+                        <li data-line="23" class="code-line">3.2.3.
+                            <a href="#-1">椭圆编辑</a>
+                        </li>
+                        <li data-line="24" class="code-line">3.2.4.
+                            <a href="#-1">矩形编辑</a>
+                        </li>
+                        <li data-line="25" class="code-line">3.2.5.
+                            <a href="#-1">填充编辑</a>
+                        </li>
+                    </ul>
+                </li>
+                <li data-line="26" class="code-line">3.3.
+                    <a href="#-1">图形数据裁剪功能</a>
+                    <ul>
+                        <li data-line="27" class="code-line">3.3.1.
+                            <a href="#-1">直线裁剪</a>
+                        </li>
+                        <li data-line="28" class="code-line">3.3.2.
+                            <a href="#-1">多边形裁剪</a>
+                        </li>
+                    </ul>
+                </li>
+                <li data-line="29" class="code-line">3.4.
+                    <a href="#-1">图形数据的变换功能</a>
+                    <ul>
+                        <li data-line="30" class="code-line">3.4.1.
+                            <a href="#-1">平移</a>
+                        </li>
+                        <li data-line="31" class="code-line">3.4.2.
+                            <a href="#-1">旋转</a>
+                        </li>
+                        <li data-line="32" class="code-line">3.4.3.
+                            <a href="#-1">缩放</a>
+                        </li>
+                    </ul>
+                </li>
+                <li data-line="33" class="code-line">3.5.
+                    <a href="#-1">图像的存储与读入</a>
+                    <ul>
+                        <li data-line="34" class="code-line">3.5.1.
+                            <a href="#-1">打开图片</a>
+                        </li>
+                        <li data-line="35" class="code-line">3.5.2.
+                            <a href="#-1">保存图片</a>
+                        </li>
+                    </ul>
+                </li>
+                <li data-line="36" class="code-line">3.6.
+                    <a href="#D">3D功能展示</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <!-- vscode-markdown-toc-config
+        numbering=true
+        autoSave=true
+        /vscode-markdown-toc-config -->
+    <!-- /vscode-markdown-toc -->
+    <hr>
+    <h2 data-line="47" class="code-line" id="1-a-namea%E6%91%98%E8%A6%81">1.
+        <a name=''></a>摘要</h2>
+    <p data-line="49" class="code-line">在之前的十月与十一月中，我的画图软件是存储的每一点的像素信息，并不符合助教所说的基于图元的画图软件，因此在十一月底，我便开始着手进行代码的重构，将画图从最初又实现了一遍……好在成果感人，在老师与助教要求的基础上，增添了许多功能并为以后扩展留下了接口，下面是我的画图软件的使用手册。
+        <img src="http://img.blog.csdn.net/20180104175649841?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="all">
+    </p>
+    <p data-line="52" class="code-line">
+        <strong>为了助教观看方便，下面我将所有的图标换成了文字</strong>
+    </p>
+    <hr>
+    <h2 data-line="56" class="code-line" id="2-a-name-1a%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83">2.
+        <a name='-1'></a>实验环境</h2>
+    <p data-line="58" class="code-line">报告采用markdown编写，并另存为了html与pdf格式，置于压缩包内report文件夹，code文件夹中包含了本次阶段性代码，Paint文件则是project的打包发布版本，便于助教测试。</p>
+    <p data-line="60" class="code-line">基于Visual Studio 2015下的 C# 编写。</p>
+    <hr>
+    <h2 data-line="64" class="code-line" id="3-a-name-1a%E5%8A%9F%E8%83%BD%E5%8F%8A%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">3.
+        <a name='-1'></a>功能及使用说明</h2>
+    <h3 data-line="66" class="code-line" id="31-a-name-1a%E5%9B%BE%E5%BD%A2%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5%E5%8A%9F%E8%83%BD">3.1.
+        <a name='-1'></a>图形数据输入功能</h3>
+    <h4 data-line="68" class="code-line" id="311-a-name-1a%E7%9B%B4%E7%BA%BF%E8%BE%93%E5%85%A5">3.1.1.
+        <a name='-1'></a>直线输入</h4>
+    <h5 data-line="70" class="code-line" id="%E7%9B%B4%E7%BA%BF%E8%BE%93%E5%85%A5%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">直线输入功能展示</h5>
+    <p data-line="72" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225191226064?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="直线输入">
+    </p>
+    <h5 data-line="74" class="code-line" id="%E7%9B%B4%E7%BA%BF%E8%BE%93%E5%85%A5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">直线输入使用说明</h5>
+    <p data-line="76" class="code-line">鼠标点击上方
+        <code>直线</code>后直接在画板内拖动即可。右侧可以选择颜色。</p>
+    <h4 data-line="78" class="code-line" id="312-a-name-1a%E5%9C%86%E8%BE%93%E5%85%A5">3.1.2.
+        <a name='-1'></a>圆输入</h4>
+    <h5 data-line="80" class="code-line" id="%E5%9C%86%E8%BE%93%E5%85%A5%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">圆输入功能展示</h5>
+    <p data-line="82" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225191627225?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="圆输入">
+    </p>
+    <h5 data-line="84" class="code-line" id="%E5%9C%86%E8%BE%93%E5%85%A5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">圆输入使用说明</h5>
+    <p data-line="86" class="code-line">鼠标点击上方
+        <code>圆</code>后直接在画板内拖动即可。右侧可以选择颜色。</p>
+    <h4 data-line="88" class="code-line" id="313-a-name-1a%E6%A4%AD%E5%9C%86%E8%BE%93%E5%85%A5">3.1.3.
+        <a name='-1'></a>椭圆输入</h4>
+    <h5 data-line="90" class="code-line" id="%E6%A4%AD%E5%9C%86%E8%BE%93%E5%85%A5%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">椭圆输入功能展示</h5>
+    <p data-line="92" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225192122908?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="椭圆输入">
+    </p>
+    <h5 data-line="94" class="code-line" id="%E6%A4%AD%E5%9C%86%E8%BE%93%E5%85%A5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">椭圆输入使用说明</h5>
+    <p data-line="96" class="code-line">鼠标点击上方
+        <code>椭圆</code>后直接在画板内拖动即可。右侧可以选择颜色。</p>
+    <h4 data-line="98" class="code-line" id="314-a-name-1a%E7%9F%A9%E5%BD%A2%E8%BE%93%E5%85%A5">3.1.4.
+        <a name='-1'></a>矩形输入</h4>
+    <h5 data-line="100" class="code-line" id="%E7%9F%A9%E5%BD%A2%E8%BE%93%E5%85%A5%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">矩形输入功能展示</h5>
+    <p data-line="102" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225192406439?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="矩形输入">
+    </p>
+    <h5 data-line="104" class="code-line" id="%E7%9F%A9%E5%BD%A2%E8%BE%93%E5%85%A5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">矩形输入使用说明</h5>
+    <p data-line="106" class="code-line">鼠标点击上方
+        <code>矩形</code>后直接在画板内拖动即可。右侧可以选择颜色。</p>
+    <h4 data-line="108" class="code-line" id="315-a-namebezierabezier%E6%9B%B2%E7%BA%BF%E8%BE%93%E5%85%A5">3.1.5.
+        <a name='Bezier'></a>Bezier曲线输入</h4>
+    <h5 data-line="110" class="code-line" id="bezier%E6%9B%B2%E7%BA%BF%E8%BE%93%E5%85%A5%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">Bezier曲线输入功能展示</h5>
+    <p data-line="112" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225192821077?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="Bezier输入">
+    </p>
+    <h5 data-line="114" class="code-line" id="bezier%E6%9B%B2%E7%BA%BF%E8%BE%93%E5%85%A5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">Bezier曲线输入使用说明</h5>
+    <p data-line="116" class="code-line">鼠标点击上方
+        <code>Bezier</code>后直接在画板内点击设置控制点即可，再次点击完成曲线输入。右侧可以选择颜色。</p>
+    <h4 data-line="118" class="code-line" id="316-a-namebab%E6%A0%B7%E6%9D%A1%E8%BE%93%E5%85%A5">3.1.6.
+        <a name='B'></a>B样条输入</h4>
+    <h5 data-line="120" class="code-line" id="b%E6%A0%B7%E6%9D%A1%E8%BE%93%E5%85%A5%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">B样条输入功能展示</h5>
+    <p data-line="122" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225192831233?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="B样条曲线输入">
+    </p>
+    <h5 data-line="124" class="code-line" id="b%E6%A0%B7%E6%9D%A1%E8%BE%93%E5%85%A5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">B样条输入使用说明</h5>
+    <p data-line="126" class="code-line">鼠标点击上方
+        <code>B样条</code>后直接在画板内点击设置控制点即可，再次点击完成曲线输入。右侧可以选择颜色。</p>
+    <h4 data-line="128" class="code-line" id="317-a-name-1a%E5%A4%9A%E8%BE%B9%E5%BD%A2%E8%BE%93%E5%85%A5">3.1.7.
+        <a name='-1'></a>多边形输入</h4>
+    <h5 data-line="130" class="code-line" id="%E5%A4%9A%E8%BE%B9%E5%BD%A2%E8%BE%93%E5%85%A5%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">多边形输入功能展示</h5>
+    <p data-line="132" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225192812684?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="多边形输入">
+    </p>
+    <h5 data-line="134" class="code-line" id="%E5%A4%9A%E8%BE%B9%E5%BD%A2%E8%BE%93%E5%85%A5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">多边形输入使用说明</h5>
+    <p data-line="136" class="code-line">鼠标点击上方
+        <code>多边形</code>后直接在画板内点击设置控制点即可，再次点击完成曲线输入。右侧可以选择颜色。</p>
+    <h4 data-line="138" class="code-line" id="318-a-name-1a%E5%A1%AB%E5%85%85%E8%BE%93%E5%85%A5">3.1.8.
+        <a name='-1'></a>填充输入</h4>
+    <h5 data-line="140" class="code-line" id="%E5%A1%AB%E5%85%85%E8%BE%93%E5%85%A5%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">填充输入功能展示</h5>
+    <p data-line="142" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225194036950?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="填充展示">
+    </p>
+    <h5 data-line="144" class="code-line" id="%E5%A1%AB%E5%85%85%E8%BE%93%E5%85%A5%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">填充输入使用说明</h5>
+    <ol>
+        <li data-line="146" class="code-line">点击
+            <code>选择</code>按钮</li>
+        <li data-line="147" class="code-line">点击图元的边</li>
+        <li data-line="148" class="code-line">点击选择
+            <code>颜色</code>(默认黑色)</li>
+        <li data-line="149" class="code-line">点击
+            <code>填充</code>按钮</li>
+    </ol>
+    <hr>
+    <h3 data-line="153" class="code-line" id="32-a-name-1a%E5%9B%BE%E5%BD%A2%E6%95%B0%E6%8D%AE%E7%BC%96%E8%BE%91%E5%8A%9F%E8%83%BD">3.2.
+        <a name='-1'></a>图形数据编辑功能</h3>
+    <h4 data-line="155" class="code-line" id="321-a-name-1a%E7%9B%B4%E7%BA%BF%E7%BC%96%E8%BE%91">3.2.1.
+        <a name='-1'></a>直线编辑</h4>
+    <h5 data-line="157" class="code-line" id="%E7%9B%B4%E7%BA%BF%E7%BC%96%E8%BE%91%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">直线编辑功能展示</h5>
+    <p data-line="159" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225194549352?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="直线编辑">
+    </p>
+    <p data-line="161" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225194556115?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="直线编辑">
+    </p>
+    <h5 data-line="163" class="code-line" id="%E7%9B%B4%E7%BA%BF%E7%BC%96%E8%BE%91%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">直线编辑使用说明</h5>
+    <ol>
+        <li data-line="165" class="code-line">点击
+            <code>选择</code>按钮</li>
+        <li data-line="166" class="code-line">点击直线边界</li>
+        <li data-line="167" class="code-line">拖动直线两侧的
+            <code>按钮</code>
+        </li>
+        <li data-line="168" class="code-line">点击空白处取消选择</li>
+    </ol>
+    <h4 data-line="170" class="code-line" id="322-a-name-1a%E5%9C%86%E7%BC%96%E8%BE%91">3.2.2.
+        <a name='-1'></a>圆编辑</h4>
+    <h5 data-line="172" class="code-line" id="%E5%9C%86%E7%BC%96%E8%BE%91%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">圆编辑功能展示</h5>
+    <p data-line="174" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225203517208?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="圆编辑">
+    </p>
+    <p data-line="176" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225203526287?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="圆编辑">
+    </p>
+    <h5 data-line="178" class="code-line" id="%E5%9C%86%E7%BC%96%E8%BE%91%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">圆编辑使用说明</h5>
+    <ol>
+        <li data-line="180" class="code-line">点击
+            <code>选择</code>按钮</li>
+        <li data-line="181" class="code-line">点击圆边界</li>
+        <li data-line="182" class="code-line">拖动圆两侧的
+            <code>按钮</code>
+        </li>
+        <li data-line="183" class="code-line">点击空白处取消选择</li>
+    </ol>
+    <h4 data-line="185" class="code-line" id="323-a-name-1a%E6%A4%AD%E5%9C%86%E7%BC%96%E8%BE%91">3.2.3.
+        <a name='-1'></a>椭圆编辑</h4>
+    <h5 data-line="187" class="code-line" id="%E6%A4%AD%E5%9C%86%E7%BC%96%E8%BE%91%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">椭圆编辑功能展示</h5>
+    <p data-line="189" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225204310554?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="椭圆编辑">
+    </p>
+    <p data-line="191" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225204317395?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="椭圆编辑">
+    </p>
+    <h5 data-line="193" class="code-line" id="%E6%A4%AD%E5%9C%86%E7%BC%96%E8%BE%91%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">椭圆编辑使用说明</h5>
+    <ol>
+        <li data-line="195" class="code-line">点击
+            <code>选择</code>按钮</li>
+        <li data-line="196" class="code-line">点击椭圆边界</li>
+        <li data-line="197" class="code-line">拖动椭圆两侧的
+            <code>按钮</code>
+        </li>
+        <li data-line="198" class="code-line">点击空白处取消选择</li>
+    </ol>
+    <h4 data-line="200" class="code-line" id="324-a-name-1a%E7%9F%A9%E5%BD%A2%E7%BC%96%E8%BE%91">3.2.4.
+        <a name='-1'></a>矩形编辑</h4>
+    <h5 data-line="202" class="code-line" id="%E7%9F%A9%E5%BD%A2%E7%BC%96%E8%BE%91%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">矩形编辑功能展示</h5>
+    <p data-line="204" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225204624287?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="矩形编辑">
+    </p>
+    <p data-line="206" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225204631685?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="矩形编辑">
+    </p>
+    <h5 data-line="208" class="code-line" id="%E7%9F%A9%E5%BD%A2%E7%BC%96%E8%BE%91%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">矩形编辑使用说明</h5>
+    <ol>
+        <li data-line="210" class="code-line">点击
+            <code>选择</code>按钮</li>
+        <li data-line="211" class="code-line">点击矩形边界</li>
+        <li data-line="212" class="code-line">拖动矩形两侧的
+            <code>按钮</code>
+        </li>
+        <li data-line="213" class="code-line">点击空白处取消选择</li>
+    </ol>
+    <h4 data-line="215" class="code-line" id="325-a-name-1a%E5%A1%AB%E5%85%85%E7%BC%96%E8%BE%91">3.2.5.
+        <a name='-1'></a>填充编辑</h4>
+    <h5 data-line="217" class="code-line" id="%E5%A1%AB%E5%85%85%E7%BC%96%E8%BE%91%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">填充编辑功能展示</h5>
+    <p data-line="219" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225205022443?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="填充编辑">
+    </p>
+    <p data-line="221" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225205030352?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="填充编辑">
+    </p>
+    <h5 data-line="223" class="code-line" id="%E5%A1%AB%E5%85%85%E7%BC%96%E8%BE%91%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">填充编辑使用说明</h5>
+    <ol>
+        <li data-line="225" class="code-line">点击
+            <code>选择</code>按钮</li>
+        <li data-line="226" class="code-line">点击
+            <code>已经填充过</code>的图元的边</li>
+        <li data-line="227" class="code-line">点击选择
+            <code>颜色</code>(默认黑色)</li>
+        <li data-line="228" class="code-line">点击
+            <code>填充</code>按钮</li>
+    </ol>
+    <hr>
+    <h3 data-line="232" class="code-line" id="33-a-name-1a%E5%9B%BE%E5%BD%A2%E6%95%B0%E6%8D%AE%E8%A3%81%E5%89%AA%E5%8A%9F%E8%83%BD">3.3.
+        <a name='-1'></a>图形数据裁剪功能</h3>
+    <h4 data-line="234" class="code-line" id="331-a-name-1a%E7%9B%B4%E7%BA%BF%E8%A3%81%E5%89%AA">3.3.1.
+        <a name='-1'></a>直线裁剪</h4>
+    <h5 data-line="236" class="code-line" id="%E7%9B%B4%E7%BA%BF%E8%A3%81%E5%89%AA%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">直线裁剪功能展示</h5>
+    <p data-line="238" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225205647537?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="直线裁剪">
+    </p>
+    <p data-line="240" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225205656617?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="直线裁剪">
+    </p>
+    <h5 data-line="242" class="code-line" id="%E7%9B%B4%E7%BA%BF%E8%A3%81%E5%89%AA%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">直线裁剪使用说明</h5>
+    <ol>
+        <li data-line="244" class="code-line">点击
+            <code>裁剪</code>按钮</li>
+        <li data-line="245" class="code-line">
+            <code>点击</code>鼠标左键并拖动控制裁剪框大小</li>
+        <li data-line="246" class="code-line">
+            <code>释放</code>鼠标左键</li>
+        <li data-line="247" class="code-line">裁剪完成</li>
+    </ol>
+    <h4 data-line="249" class="code-line" id="332-a-name-1a%E5%A4%9A%E8%BE%B9%E5%BD%A2%E8%A3%81%E5%89%AA">3.3.2.
+        <a name='-1'></a>多边形裁剪</h4>
+    <h5 data-line="251" class="code-line" id="%E5%A4%9A%E8%BE%B9%E5%BD%A2%E8%A3%81%E5%89%AA%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">多边形裁剪功能展示</h5>
+    <p data-line="253" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225210631641?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="多边形裁剪">
+    </p>
+    <p data-line="255" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225210640131?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="多边形裁剪">
+    </p>
+    <h5 data-line="257" class="code-line" id="%E5%A4%9A%E8%BE%B9%E5%BD%A2%E8%A3%81%E5%89%AA%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">多边形裁剪使用说明</h5>
+    <ol>
+        <li data-line="259" class="code-line">点击
+            <code>裁剪</code>按钮</li>
+        <li data-line="260" class="code-line">
+            <code>点击</code>鼠标左键并拖动控制裁剪框大小</li>
+        <li data-line="261" class="code-line">
+            <code>释放</code>鼠标左键</li>
+        <li data-line="262" class="code-line">裁剪完成</li>
+    </ol>
+    <hr>
+    <h3 data-line="266" class="code-line" id="34-a-name-1a%E5%9B%BE%E5%BD%A2%E6%95%B0%E6%8D%AE%E7%9A%84%E5%8F%98%E6%8D%A2%E5%8A%9F%E8%83%BD">3.4.
+        <a name='-1'></a>图形数据的变换功能</h3>
+    <h4 data-line="268" class="code-line" id="341-a-name-1a%E5%B9%B3%E7%A7%BB">3.4.1.
+        <a name='-1'></a>平移</h4>
+    <h5 data-line="270" class="code-line" id="%E5%B9%B3%E7%A7%BB%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">平移功能展示</h5>
+    <p data-line="272" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225191239816?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="直线平移">
+    </p>
+    <p data-line="274" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225191639071?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="圆平移">
+    </p>
+    <p data-line="276" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225192108954?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="椭圆平移">
+    </p>
+    <p data-line="278" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225192416372?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="矩形平移">
+    </p>
+    <h5 data-line="280" class="code-line" id="%E5%B9%B3%E7%A7%BB%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">平移使用说明</h5>
+    <ol>
+        <li data-line="282" class="code-line">点击
+            <code>选择</code>按钮</li>
+        <li data-line="283" class="code-line">点击
+            <code>要平移</code>的图元的边</li>
+        <li data-line="284" class="code-line">鼠标左键
+            <code>点击图元内部</code>并平移</li>
+        <li data-line="285" class="code-line">鼠标左键
+            <code>释放</code>
+        </li>
+        <li data-line="286" class="code-line">平移完成</li>
+    </ol>
+    <h4 data-line="288" class="code-line" id="342-a-name-1a%E6%97%8B%E8%BD%AC">3.4.2.
+        <a name='-1'></a>旋转</h4>
+    <h5 data-line="290" class="code-line" id="%E6%97%8B%E8%BD%AC%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">旋转功能展示</h5>
+    <p data-line="292" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225191247925?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="直线旋转">
+    </p>
+    <p data-line="294" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225191646709?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="圆旋转">
+    </p>
+    <p data-line="296" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225192129764?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="椭圆旋转">
+    </p>
+    <p data-line="298" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225192426079?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="矩形旋转">
+    </p>
+    <h5 data-line="300" class="code-line" id="%E6%97%8B%E8%BD%AC%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">旋转使用说明</h5>
+    <ol>
+        <li data-line="302" class="code-line">点击
+            <code>选择</code>按钮</li>
+        <li data-line="303" class="code-line">点击
+            <code>要旋转</code>的图元的边</li>
+        <li data-line="304" class="code-line">鼠标左键
+            <code>旋转</code>
+        </li>
+        <li data-line="305" class="code-line">图元逆时针旋转约
+            <code>20°</code>
+        </li>
+    </ol>
+    <h4 data-line="307" class="code-line" id="343-a-name-1a%E7%BC%A9%E6%94%BE">3.4.3.
+        <a name='-1'></a>缩放</h4>
+    <h5 data-line="309" class="code-line" id="%E7%BC%A9%E6%94%BE%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">缩放功能展示</h5>
+    <p data-line="311" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225212730571?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="缩放功能">
+    </p>
+    <p data-line="313" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225212747473?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="缩放功能">
+    </p>
+    <h5 data-line="315" class="code-line" id="%E7%BC%A9%E6%94%BE%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">缩放使用说明</h5>
+    <ol>
+        <li data-line="317" class="code-line">点击
+            <code>选择</code>按钮</li>
+        <li data-line="318" class="code-line">点击
+            <code>缩放</code>的图元的边</li>
+        <li data-line="319" class="code-line">通过拖动图元左上角与右下角的点实现缩放</li>
+    </ol>
+    <hr>
+    <h3 data-line="323" class="code-line" id="35-a-name-1a%E5%9B%BE%E5%83%8F%E7%9A%84%E5%AD%98%E5%82%A8%E4%B8%8E%E8%AF%BB%E5%85%A5">3.5.
+        <a name='-1'></a>图像的存储与读入</h3>
+    <h4 data-line="325" class="code-line" id="351-a-name-1a%E6%89%93%E5%BC%80%E5%9B%BE%E7%89%87">3.5.1.
+        <a name='-1'></a>打开图片</h4>
+    <p data-line="327" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225190740654?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="打开图片">
+    </p>
+    <p data-line="329" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225190802581?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="打开图片展示">
+    </p>
+    <h4 data-line="331" class="code-line" id="352-a-name-1a%E4%BF%9D%E5%AD%98%E5%9B%BE%E7%89%87">3.5.2.
+        <a name='-1'></a>保存图片</h4>
+    <p data-line="333" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225190826923?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="保存图片">
+    </p>
+    <p data-line="335" class="code-line">
+        <img src="http://img.blog.csdn.net/20171225191008007?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="保存结果展示">
+    </p>
+    <hr>
+    <h3 data-line="340" class="code-line" id="36-a-nameda3d%E5%8A%9F%E8%83%BD%E5%B1%95%E7%A4%BA">3.6.
+        <a name='D'></a>3D功能展示</h3>
+    <p data-line="342" class="code-line">点击上方3D按钮，即可弹出3D窗口，鼠标左键摁下后拖动可以实现对3D图形的旋转预览。</p>
+    <p data-line="344" class="code-line">
+        <img src="http://img.blog.csdn.net/20180104175823285?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvanVzdGljZTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"
+            alt="3D">
+    </p>
+
+</body>
+
+</html>
